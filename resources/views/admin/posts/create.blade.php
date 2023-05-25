@@ -53,8 +53,9 @@
         <div class="mb-3">
 
             @foreach ($technologies as $technology)
-                <input type="checkbox" id="technology_id" name="technologies[]" value="{{ $technology->id }}">
-                <label for="technology_id">{{ $technology->name }}</label>
+                <input type="checkbox" id="technology_{{ $technology->id }}" name="technologies[]"
+                    value="{{ $technology->id }}">
+                <label for="technology_{{ $technology->id }}">{{ $technology->name }}</label>
                 <br>
             @endforeach
             @error('technologies')

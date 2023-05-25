@@ -39,9 +39,8 @@ class PostController extends Controller
         );
         $form_data = $request->all();
         $newPost = new Post();
-        $newPost->fill($form_data);
-        $newPost->technologies()->attach($request->tags);
-        $newPost->save();
+        $newPost->create($form_data);
+        $newPost->technologies()->attach($request->technologies);
 
 
         return redirect()->route('admin.posts.index');
