@@ -14,7 +14,6 @@ class Post extends Model
         'content',
         'thumb',
         'type_id',
-        'technologies'
     ];
 
     public function type()

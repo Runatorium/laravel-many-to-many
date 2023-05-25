@@ -14,14 +14,12 @@
             <tr>
                 <td scope="row">{{ $post->id }}</td>
                 <td scope="row">{{ $post->title }}</td>
-                <td colspan="2">{{ $post->type ? $post->type->name : 'nessun tipo' }}</td>
-                @foreach ($post->technologies as $technology)
-                    <td scope="row">{{ $technology->name }}</td>
-                @endforeach ( )
-
-
-
-
+                <td scope="row">{{ $post->type ? $post->type->name : 'nessun tipo' }}</td>
+                <td>
+                    @foreach ($post->technologies as $technology)
+                        {{ $technology->name }}
+                    @endforeach
+                </td>
                 <td>
                     <a href="{{ route('admin.posts.show', ['post' => $post->id]) }}"><button
                             class="btn btn-primary">vedi</button></a>

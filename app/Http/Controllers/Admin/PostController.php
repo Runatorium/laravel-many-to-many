@@ -38,10 +38,12 @@ class PostController extends Controller
             ]
         );
         $form_data = $request->all();
-        $newPost = new Post();
-        $newPost->create($form_data);
-        $newPost->technologies()->attach($request->technologies);
 
+        $newPost = Post::create($form_data);
+
+        if ($request->has('technologies')) {
+            $newPost->technologies()->attach($request->technologies);
+        }
 
         return redirect()->route('admin.posts.index');
     }
@@ -64,6 +66,7 @@ class PostController extends Controller
 
     public function update(Request $request, $id)
     {
+
         $post = Post::findOrFail($id);
 
         $request->validate(
@@ -78,6 +81,7 @@ class PostController extends Controller
         $form_data = $request->all();
         $post->update($form_data);
 
+        $post->technologies()->sync($request->technologies);
         return redirect()->route('admin.posts.index', compact('post'));
     }
 
