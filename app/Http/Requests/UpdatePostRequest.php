@@ -19,7 +19,8 @@ class UpdatePostRequest extends FormRequest
             'title' => 'required|15',
             'content' => 'nullable|300',
             'thumb' => 'nullable|300',
-            'type_id' => 'nullable|exists:types,id'
+            'type_id' => 'nullable|exists:types,id',
+            'technologies' => 'exists:technologies,id'
         ];
     }
 }

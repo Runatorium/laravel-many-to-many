@@ -7,6 +7,7 @@
                 <th scope="col">id</th>
                 <th scope="col">titolo</th>
                 <th scope="col">name</th>
+                <th scope="col">Tecnologie usate</th>
             </tr>
         </thead>
         @foreach ($posts as $post)
@@ -14,6 +15,13 @@
                 <td scope="row">{{ $post->id }}</td>
                 <td scope="row">{{ $post->title }}</td>
                 <td colspan="2">{{ $post->type ? $post->type->name : 'nessun tipo' }}</td>
+                @foreach ($post->technologies as $technology)
+                    <td scope="row">{{ $technology->name }}</td>
+                @endforeach ( )
+
+
+
+
                 <td>
                     <a href="{{ route('admin.posts.show', ['post' => $post->id]) }}"><button
                             class="btn btn-primary">vedi</button></a>

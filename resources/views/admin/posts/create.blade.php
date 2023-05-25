@@ -27,8 +27,6 @@
 
         <div class="mb-3">
             <label for="type_id" class="form-label">Categoria</label>
-
-
             <select class="form-select" name="type_id" id="type_id">
                 <option @selected(old('type_id') == '') value="">nessuna categoria</option>
                 @foreach ($types as $type)
@@ -47,6 +45,19 @@
             <label for="content" class="form-label">Post Content</label>
             <textarea type="text" class="form-control @error('content') is-invalid @enderror" id="content" name="content">{{ old('content') }}</textarea>
             @error('content')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
+        </div>
+
+
+        <div class="mb-3">
+
+            @foreach ($technologies as $technology)
+                <input type="checkbox" id="technology_id" name="technologies[]" value="{{ $technology->id }}">
+                <label for="technology_id">{{ $technology->name }}</label>
+                <br>
+            @endforeach
+            @error('technologies')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         </div>

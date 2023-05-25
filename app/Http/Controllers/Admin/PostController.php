@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Post;
+use App\Models\Technology;
 use App\Models\Type;
 use Illuminate\Http\Request;
 
@@ -20,7 +21,8 @@ class PostController extends Controller
     public function create()
     {
         $types = Type::all();
-        return view('admin.posts.create', compact('types'));
+        $technologies = Technology::all();
+        return view('admin.posts.create', compact('types', 'technologies'));
     }
 
 
@@ -31,13 +33,16 @@ class PostController extends Controller
                 'title' => 'required|max:15',
                 'content' => 'nullable|max:300',
                 'thumb' => 'nullable|max:300',
-                'type_id' => 'nullable|exists:types,id'
+                'type_id' => 'nullable|exists:types,id',
+                'technologies' => 'exists:technologies,id'
             ]
         );
         $form_data = $request->all();
         $newPost = new Post();
         $newPost->fill($form_data);
+        $newPost->technologies()->attach($request->tags);
         $newPost->save();
+
 
         return redirect()->route('admin.posts.index');
     }
@@ -52,8 +57,9 @@ class PostController extends Controller
 
     public function edit(Post $post)
     {
+        $technologies = Technology::all();
         $types = Type::all();
-        return view('admin.posts.edit', compact('post', 'types'));
+        return view('admin.posts.edit', compact('post', 'types', 'technologies'));
     }
 
 
@@ -66,7 +72,8 @@ class PostController extends Controller
                 'title' => 'required|max:15',
                 'content' => 'nullable|max:300',
                 'thumb' => 'nullable|max:300',
-                'type_id' => 'nullable|exists:types,id'
+                'type_id' => 'nullable|exists:types,id',
+                'technologies' => 'exists:technologies,id'
             ]
         );
         $form_data = $request->all();
