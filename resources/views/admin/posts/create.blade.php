@@ -6,7 +6,7 @@
     <form method="POST" action="{{ route('admin.posts.store') }}">
 
         @csrf
-
+        {{-- working on image upload later --}}
         <div class="mb-3">
             <label for="thumb" class="form-label">Url dell'immagine</label>
             <input type="text" class="form-control @error('thumb') is-invalid @enderror" id="thumb" name="thumb"
@@ -62,6 +62,7 @@
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         </div>
+
 
         <button type="submit" class="btn btn-primary">Salva</button>
     </form>
